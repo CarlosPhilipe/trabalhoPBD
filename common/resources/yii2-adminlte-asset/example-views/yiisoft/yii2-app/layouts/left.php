@@ -1,3 +1,12 @@
+<?php
+
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+use yii\helpers\Html;
+
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -26,41 +35,75 @@
         </form>
         <!-- /.search form -->
 
-        <?= dmstr\widgets\Menu::widget(
+        <?
+        $menuItems[] = ['label' => 'Menu', 'options' => ['class' => 'header']];
+
+        if (Yii::$app->user->isGuest) {
+            $menuItems[] = ['label' => 'Entrar', 'url' => ['/site/login']];
+            $menuItems[] = ['label' => 'Cadastre-se', 'url' => ['/site/signup']];
+
+        } else {
+            $menuItems[] = ['label' => 'Sair', 'url' => ['/site/logout'], ];
+        }
+        /*$menuItems[] = [
+          'label' => 'Same tools',
+          'icon' => 'fa fa-share',
+          'url' => '#',
+          'items' => [
+              ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
+              ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
+              [
+                  'label' => 'Level One',
+                  'icon' => 'fa fa-circle-o',
+                  'url' => '#',
+                  'items' => [
+                      ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                      [
+                          'label' => 'Level Two',
+                          'icon' => 'fa fa-circle-o',
+                          'url' => '#',
+                          'items' => [
+                              ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                              ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                          ],
+                      ],
+                  ],
+              ],
+          ],
+      ];*/
+      $menuItems[] =[
+          'label' => 'Categoria',
+          'icon' => 'fa fa-share',
+          'url' => '#',
+          'visible' => !Yii::$app->user->isGuest,
+          'items' => [
+              ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/categoria/create'],],
+              ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
+              [
+                  'label' => 'Level One',
+                  'icon' => 'fa fa-circle-o',
+                  'url' => '#',
+                  'items' => [
+                      ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                      [
+                          'label' => 'Level Two',
+                          'icon' => 'fa fa-circle-o',
+                          'url' => '#',
+                          'items' => [
+                              ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                              ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                          ],
+                      ],
+                  ],
+              ],
+          ],
+      ];
+
+
+        echo dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
-                'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    [
-                        'label' => 'Same tools',
-                        'icon' => 'fa fa-share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'fa fa-circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'fa fa-circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                'items' => $menuItems,
             ]
         ) ?>
 
