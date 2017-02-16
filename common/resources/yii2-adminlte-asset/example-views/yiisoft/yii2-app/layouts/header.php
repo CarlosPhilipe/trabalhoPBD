@@ -19,6 +19,7 @@ use yii\helpers\Html;
 
             <ul class="nav navbar-nav">
 
+              <?php if(!Yii::$app->user->isGuest):?>
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -33,7 +34,7 @@ use yii\helpers\Html;
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+                                            <img src="imagens/logo.png"  class="img-circle"
                                                  alt="User Image"/>
                                         </div>
                                         <h4>
@@ -47,7 +48,7 @@ use yii\helpers\Html;
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user3-128x128.jpg" class="img-circle"
+                                            <img src="imagens/logo.png"  class="img-circle"
                                                  alt="user image"/>
                                         </div>
                                         <h4>
@@ -101,6 +102,8 @@ use yii\helpers\Html;
                         <li class="footer"><a href="#">See All Messages</a></li>
                     </ul>
                 </li>
+              <?php endif;?>
+              <?php if(!Yii::$app->user->isGuest):?>
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
@@ -143,6 +146,8 @@ use yii\helpers\Html;
                         <li class="footer"><a href="#">View all</a></li>
                     </ul>
                 </li>
+              <?php endif;?>
+              <?php if(!Yii::$app->user->isGuest):?>
                 <!-- Tasks: style can be found in dropdown.less -->
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -225,25 +230,27 @@ use yii\helpers\Html;
                         </li>
                     </ul>
                 </li>
+              <?php endif;?>
                 <!-- User Account: style can be found in dropdown.less -->
 
+                <?php if(!Yii::$app->user->isGuest):?>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                        <img src="imagens/logo.png"  class="user-image" alt="User Image"/>
                         <span class="hidden-xs"><?= Yii::$app->user->identity->nome; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+                            <img src="imagens/logo.png"  class="img-circle"
                                  alt="User Image"/>
 
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <?= Yii::$app->user->identity->nome; ?>
+                                <small><?= Yii::$app->user->identity->email; ?></small>
                             </p>
                         </li>
-                        <!-- Menu Body -->
+                        <!-- Menu Body
                         <li class="user-body">
                             <div class="col-xs-4 text-center">
                                 <a href="#">Followers</a>
@@ -254,27 +261,25 @@ use yii\helpers\Html;
                             <div class="col-xs-4 text-center">
                                 <a href="#">Friends</a>
                             </div>
-                        </li>
+                        </li>-->
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
-                                    'Sign out',
-                                    ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                    'Sair',
+                                    ['site/logout'],
+                                    [ 'class' => 'btn btn-default btn-flat']
                                 ) ?>
                             </div>
                         </li>
                     </ul>
                 </li>
-
+              <?php endif;?>
                 <!-- User Account: style can be found in dropdown.less -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+                
             </ul>
         </div>
     </nav>

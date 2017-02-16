@@ -14,13 +14,14 @@ use yii\helpers\Html;
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="imagens/logo.png"  class="img-circle" alt="Logo image"/>
             </div>
+            <?php if(!Yii::$app->user->isGuest):?>
             <div class="pull-left info">
                 <p><?= wordwrap(Yii::$app->user->identity->nome, 20, "<br />\n"); ?></p>
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
+          <?php endif;?>
         </div>
 
         <!-- search form -->
