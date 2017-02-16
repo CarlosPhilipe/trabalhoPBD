@@ -23,7 +23,6 @@ use yii\helpers\Html;
             </div>
           <?php endif;?>
         </div>
-
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -38,6 +37,13 @@ use yii\helpers\Html;
 
         <?
         $menuItems[] = ['label' => 'Menu', 'options' => ['class' => 'header']];
+
+        if (!Yii::$app->user->isGuest)
+        {
+          $menuItems[] = ['label' => 'Despesas', 'url' => ['/despesa/']];
+          $menuItems[] = ['label' => 'Receitas', 'url' => ['/receita/']];
+
+        }
 
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Entrar', 'url' => ['/site/login']];
@@ -72,34 +78,6 @@ use yii\helpers\Html;
               ],
           ],
       ];*/
-      $menuItems[] =[
-          'label' => 'Categoria',
-          'icon' => 'fa fa-share',
-          'url' => '#',
-          'visible' => !Yii::$app->user->isGuest,
-          'items' => [
-              ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/categoria/create'],],
-              ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-              [
-                  'label' => 'Level One',
-                  'icon' => 'fa fa-circle-o',
-                  'url' => '#',
-                  'items' => [
-                      ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                      [
-                          'label' => 'Level Two',
-                          'icon' => 'fa fa-circle-o',
-                          'url' => '#',
-                          'items' => [
-                              ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                              ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                          ],
-                      ],
-                  ],
-              ],
-          ],
-      ];
-
 
         echo dmstr\widgets\Menu::widget(
             [
