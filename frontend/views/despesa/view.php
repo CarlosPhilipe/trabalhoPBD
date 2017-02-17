@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Despesa */
 
-$this->title = 'Despesa com '.$model->categoria->nome;
+$this->title = 'Despesa com '.$model->info_adicional;
 $this->params['breadcrumbs'][] = ['label' => 'Despesas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
