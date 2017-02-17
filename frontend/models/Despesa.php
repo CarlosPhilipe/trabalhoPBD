@@ -58,12 +58,12 @@ class Despesa extends \yii\db\ActiveRecord
             'id' => 'ID',
             'data_vencimento' => 'Data Vencimento',
             'valor' => 'Valor',
-            'descricao' => 'Descricao',
+            'descricao' => 'Descrição',
             'data_cadastro' => 'Data Cadastro',
             'info_adicional' => 'Info Adicional',
-            'situacao_id' => 'Situacao ID',
-            'user_id' => 'User ID',
-            'categoria_id' => 'Categoria ID',
+            'situacao_id' => 'Situação',
+            'user_id' => 'Usuário',
+            'categoria_id' => 'Categoria',
         ];
     }
 

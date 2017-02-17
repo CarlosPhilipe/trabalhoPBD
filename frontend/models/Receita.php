@@ -56,10 +56,10 @@ class Receita extends \yii\db\ActiveRecord
             'data_cadastro' => 'Data Cadastro',
             'valor' => 'Valor',
             'info_adicional' => 'Info Adicional',
-            'descricao' => 'Descricao',
-            'situacao_id' => 'Situacao ID',
-            'user_id' => 'User ID',
-            'categoria_id' => 'Categoria ID',
+            'descricao' => 'Descrição',
+            'situacao_id' => 'Situação',
+            'user_id' => 'Usuário',
+            'categoria_id' => 'Categoria',
         ];
     }
 

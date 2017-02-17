@@ -4,10 +4,13 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Despesa;
+use frontend\models\Situacao;
+use frontend\models\Categoria;
 use frontend\models\DespesaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * DespesaController implements the CRUD actions for Despesa model.
@@ -64,12 +67,25 @@ class DespesaController extends Controller
     public function actionCreate()
     {
         $model = new Despesa();
+        $model->user_id = Yii::$app->user->id;
+        $model->data_cadastro = date('Y-m-d H:i');
+
+        $categoria = Categoria::find()->orderBy('nome')->all();
+        $categoria = ArrayHelper::map($categoria, 'id', 'nome');
+
+
+        $situacao = Situacao::find()->orderBy('nome')->all();
+        $situacao = ArrayHelper::map($situacao, 'id', 'nome');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'categoria' =>$categoria,
+                'situacao' =>$situacao,
+
             ]);
         }
     }
@@ -84,11 +100,21 @@ class DespesaController extends Controller
     {
         $model = $this->findModel($id);
 
+        $categoria = Categoria::find()->orderBy('nome')->all();
+        $categoria = ArrayHelper::map($categoria, 'id', 'nome');
+
+
+        $situacao = Situacao::find()->orderBy('nome')->all();
+        $situacao = ArrayHelper::map($situacao, 'id', 'nome');
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'categoria' =>$categoria,
+                'situacao' =>$situacao,
             ]);
         }
     }

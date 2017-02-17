@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Despesa */
 
-$this->title = 'Create Despesa';
+$this->title = 'Nova Despesa';
 $this->params['breadcrumbs'][] = ['label' => 'Despesas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'categoria' => $categoria,
+        'situacao' => $situacao,
     ]) ?>
 
 </div>
