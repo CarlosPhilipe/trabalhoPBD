@@ -40,6 +40,7 @@ use yii\helpers\Html;
 
         if (!Yii::$app->user->isGuest)
         {
+          $menuItems[] = ['label' => 'Lista', 'url' => ['/site/']];
           $menuItems[] = ['label' => 'Despesas', 'url' => ['/despesa/']];
           $menuItems[] = ['label' => 'Receitas', 'url' => ['/receita/']];
 
