@@ -35,7 +35,7 @@ use yii\helpers\Html;
         </form>
         <!-- /.search form -->
 
-        <?
+        <?php
         $menuItems[] = ['label' => 'Menu', 'options' => ['class' => 'header']];
 
         if (!Yii::$app->user->isGuest)
