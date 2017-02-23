@@ -36,7 +36,7 @@ class Receita extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['valor', 'situacao_id', 'user_id', 'categoria_id'], 'required'],
+            [['valor', 'situacao_id', 'user_id', 'categoria_id'], 'required','message' => 'O campo {attribute} não pode ser branco'],
             [['descricao'], 'string'],
             [['situacao_id', 'user_id', 'categoria_id'], 'integer'],
             [['data_cadastro', 'valor', 'info_adicional'], 'string', 'max' => 45],

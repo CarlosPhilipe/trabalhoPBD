@@ -1,7 +1,7 @@
 <?php
 
 namespace frontend\models;
-
+use common\resources\Uteis;
 use Yii;
 
 /**
@@ -38,7 +38,7 @@ class Despesa extends \yii\db\ActiveRecord
     {
         return [
             [['data_vencimento', 'data_cadastro'], 'safe'],
-            [['valor', 'situacao_id', 'user_id', 'categoria_id'], 'required'],
+            [['valor', 'situacao_id', 'user_id', 'categoria_id', 'data_vencimento'], 'required', 'message' => 'O campo {attribute} não pode ser branco'],
             [['valor'], 'number'],
             [['descricao'], 'string'],
             [['situacao_id', 'user_id', 'categoria_id'], 'integer'],
@@ -89,5 +89,17 @@ class Despesa extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function beforeValidate()
+    {
+      $this->valor           = Uteis::formatoMoedaParaFloat($this->valor);
+      $this->data_vencimento = Uteis::formatoDataTelaBanco($this->data_vencimento);
+
+      if (parent::beforeValidate()) {
+          return true;
+      }
+      return false;
+
     }
 }

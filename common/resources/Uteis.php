@@ -21,5 +21,17 @@ class Uteis {
     return Uteis::arrayDespesaReceita()[$key];
   }
 
+  public static function formatoMoedaParaFloat($value){
+    $value = str_replace('','R$ ', $value);
+    $value = str_replace('',',',$value);
+    $value = str_replace(',','.',$value);
+    return $value;
+  }
+
+  public static function formatoDataTelaBanco($value){
+    $value = date("yyyy-mm-dd", strtotime($value));
+    return $value;
+  }
+
 
 }

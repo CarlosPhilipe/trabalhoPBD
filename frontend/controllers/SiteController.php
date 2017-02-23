@@ -12,6 +12,9 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Despesa;
+use frontend\models\Receita;
+use yii\db\Query;
 
 /**
  * Site controller
@@ -72,7 +75,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+      $query = new Query;
+      // compose the query
+      $query->select('receita.* ')->from('receita');
+      // build and execute the query
+      $rows = $query->all();
+      // alternatively, you can create DB command and execute it
+      $command = $query->createCommand();
+      // $command->sql returns the actual SQL
+      $rows = $command->queryAll();
+
+      return $this->render('index', ["movimentacoes" => $rows]);
     }
 
     /**

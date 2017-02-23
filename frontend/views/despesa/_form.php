@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+use kartik\money\MaskMoney;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Despesa */
@@ -9,14 +11,29 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="despesa-form">
-
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'valor')->textInput() ?>
+    <?=  $form->field($model, 'valor')->widget(MaskMoney::classname(), [
+          'pluginOptions' => [
+              'prefix' => 'R$ ',
+              'thousands' => '.',
+              'decimal' => ',',
+              'allowNegative' => false
+          ]
+      ]);?>
 
     <?= $form->field($model, 'info_adicional')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data_vencimento')->textInput() ?>
+    <?=  DatePicker::widget([
+          'name' => 'data_vencimento',
+          'value' => $model->data_cadastro,
+          'options' => ['placeholder' => 'Selecione uma data ...'],
+          'pluginOptions' => [
+              //'format' => 'yyyy-mm-dd',
+              'todayHighlight' => true
+          ]
+      ]);
+    ?>
 
     <?= $form->field($model, 'situacao_id')->dropDownList($situacao, ['prompt'=>'']) ?>
 
