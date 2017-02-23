@@ -24,13 +24,11 @@ use kartik\money\MaskMoney;
 
     <?= $form->field($model, 'info_adicional')->textInput(['maxlength' => true]) ?>
 
-    <?=  DatePicker::widget([
-          'name' => 'data_vencimento',
-          'value' => $model->data_cadastro,
-          'options' => ['placeholder' => 'Selecione uma data ...'],
+    <?= $form->field($model, 'data_vencimento')->widget(DatePicker::classname(), [
+          'options' => ['placeholder' => 'Selecione a data ...'],
           'pluginOptions' => [
-              //'format' => 'yyyy-mm-dd',
-              'todayHighlight' => true
+              'autoclose'=>true,
+              'format' => 'dd/mm/yyyy'
           ]
       ]);
     ?>

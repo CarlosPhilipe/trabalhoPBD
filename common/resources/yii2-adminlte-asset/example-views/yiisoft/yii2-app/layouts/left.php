@@ -47,7 +47,7 @@ use yii\helpers\Html;
         }
 
         if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => 'Entrar', 'url' => ['/site/login']];
+            $menuItems[] = ['label' => 'Entrar', 'url' => ['/site/index']];
             $menuItems[] = ['label' => 'Cadastre-se', 'url' => ['/site/signup']];
 
         } else {

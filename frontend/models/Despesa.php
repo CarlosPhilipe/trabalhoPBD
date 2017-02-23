@@ -28,7 +28,7 @@ class Despesa extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'despesa';
+        return 'conta';
     }
 
     /**
@@ -93,13 +93,31 @@ class Despesa extends \yii\db\ActiveRecord
 
     public function beforeValidate()
     {
-      $this->valor           = Uteis::formatoMoedaParaFloat($this->valor);
-      $this->data_vencimento = Uteis::formatoDataTelaBanco($this->data_vencimento);
-
+      $this->valor  = Uteis::formatoMoedaParaFloat($this->valor);
+        $this->data_vencimento = Uteis::formatoDataTelaBanco($this->data_vencimento);
       if (parent::beforeValidate()) {
           return true;
       }
       return false;
 
+    }
+
+
+    public function beforeSave($insert)
+    {
+      //  var_dump($this->data_vencimento);
+
+
+        if (parent::beforeSave($insert)) {
+            // ...custom code here...
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function afterFind()
+    {
+        $this->data_vencimento = Uteis::formatoDataBancoTela($this->data_vencimento);
     }
 }

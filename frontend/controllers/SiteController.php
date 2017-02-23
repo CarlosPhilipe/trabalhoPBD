@@ -75,17 +75,28 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+      if (Yii::$app->user->isGuest) {
+          return $this->actionLogin();
+      }
+      // pega todas as contas com base no usuário
       $query = new Query;
       // compose the query
-      $query->select('receita.* ')->from('receita');
+      $query->select('*')
+      ->from('conta')
+      ->where(['user_id' => Yii::$app->user->id])
+      ->orderBy(['data_cadastro'=>SORT_DESC]);
       // build and execute the query
       $rows = $query->all();
       // alternatively, you can create DB command and execute it
       $command = $query->createCommand();
       // $command->sql returns the actual SQL
       $rows = $command->queryAll();
+      //------------
 
-      return $this->render('index', ["movimentacoes" => $rows]);
+
+      return $this->render('index', [
+        "movimentacoes" => $rows
+      ]);
     }
 
     /**

@@ -69,6 +69,7 @@ class DespesaController extends Controller
         $model = new Despesa();
         $model->user_id = Yii::$app->user->id;
         $model->data_cadastro = date('Y-m-d H:i');
+        $model->tipo = 0; // recebe zero porque é despesa
 
         $categoria = Categoria::find()->orderBy('nome')->all();
         $categoria = ArrayHelper::map($categoria, 'id', 'nome');

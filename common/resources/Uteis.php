@@ -29,7 +29,21 @@ class Uteis {
   }
 
   public static function formatoDataTelaBanco($value){
-    $value = date("yyyy-mm-dd", strtotime($value));
+  //  var_dump($value);
+
+    if($value != '')
+    {
+        $value = explode("/", $value);
+        $value = $value[2]."-".$value[1]."-".$value[0];
+    }
+
+    //var_dump($value);
+    return $value;
+  }
+
+
+  public static function formatoDataBancoTela($value){
+    $value = date("d/m/Y", strtotime($value));
     return $value;
   }
 

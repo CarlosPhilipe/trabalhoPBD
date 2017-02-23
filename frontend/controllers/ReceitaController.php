@@ -70,6 +70,7 @@ class ReceitaController extends Controller
 
         $model->user_id = Yii::$app->user->id;
         $model->data_cadastro = date('Y-m-d H:i');
+        $model->tipo = 1; // recebe UM porque é Receita
 
         $categoria = Categoria::find()->orderBy('nome')->all();
         $categoria = ArrayHelper::map($categoria, 'id', 'nome');
