@@ -78,24 +78,13 @@ class SiteController extends Controller
       if (Yii::$app->user->isGuest) {
           return $this->actionLogin();
       }
-      // pega todas as contas com base no usuário
-      $query = new Query;
-      // compose the query
-      $query->select('*')
-      ->from('conta')
-      ->where(['user_id' => Yii::$app->user->id])
-      ->orderBy(['data_cadastro'=>SORT_DESC]);
-      // build and execute the query
-      $rows = $query->all();
-      // alternatively, you can create DB command and execute it
-      $command = $query->createCommand();
-      // $command->sql returns the actual SQL
-      $rows = $command->queryAll();
-      //------------
 
+      $movimentacoes = $this->getMovimentacoes();
+      $saldo = $this->getSaldo();
 
       return $this->render('index', [
-        "movimentacoes" => $rows
+        "movimentacoes" => $movimentacoes,
+        "saldo" => $saldo
       ]);
     }
 
@@ -233,5 +222,39 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+
+    private function getSaldo()
+    {
+      $sql1 = "(select sum(valor) as despesa from conta where tipo = 0 and user_id = ".(Yii::$app->user->id).") ";
+      $sql2 = "(select sum(valor) as receita from conta where tipo = 1 and user_id = ".(Yii::$app->user->id).") ";
+
+      $command = Yii::$app->db->createCommand($sql1);
+      $despesa = $command->queryScalar();
+
+      $command = Yii::$app->db->createCommand($sql2);
+      $receita = $command->queryScalar();
+
+      return($receita - $despesa);
+
+    }
+
+    private function getMovimentacoes(){
+
+      // pega todas as contas com base no usuário
+      $query = new Query;
+      // compose the query
+      $query->select('*')
+      ->from('conta')
+      ->where(['user_id' => Yii::$app->user->id])
+      ->orderBy(['data_cadastro'=>SORT_DESC]);
+      // build and execute the query
+      $rows = $query->all();
+      // alternatively, you can create DB command and execute it
+      // /$command = $query->createCommand();
+      // $command->sql returns the actual SQL
+      //------------
+      return $rows = $query->all();
     }
 }
